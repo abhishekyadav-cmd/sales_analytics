@@ -1,0 +1,9 @@
+with source as (
+    select * from {{ source('raw', 'region_targets') }}
+)
+select
+    upper(trim(region_name)) as region_name,
+    cast(target_year as int) as target_year,
+    cast(sales_target as decimal(18, 2)) as sales_target,
+    loaded_at
+from source
